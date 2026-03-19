@@ -20,5 +20,10 @@ Full-stack application designed for agricultural and carbon footprint management
 - Implemented frontend features (Angular)
 - Translated IPCC-based carbon models into backend logic and data structures
 
+## Repository Structure
+/backend → Spring Boot API (controllers, services, entities)
+/frontend → Angular components and services (simplified)
+/docs → architecture notes
+
 ## Notes
 This repository contains a simplified version of selected components from a real production system (ARIMA).
