@@ -1,0 +1,113 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div>
+    <label>Request Number</label>
+    <input type="text" formControlName="requestNumber" />
+
+    @if (form.get('requestNumber')?.touched && form.get('requestNumber')?.invalid) {
+      <div>
+        @if (form.get('requestNumber')?.errors?.['required']) {
+          <small>Required field</small>
+        }
+        @if (form.get('requestNumber')?.errors?.['maxlength']) {
+          <small>Max 20 characters</small>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Supplier</label>
+    <input type="text" formControlName="supplierName" />
+
+    @if (form.get('supplierName')?.touched && form.get('supplierName')?.invalid) {
+      <div>
+        @if (form.get('supplierName')?.errors?.['required']) {
+          <small>Required field</small>
+        }
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Order Date</label>
+    <input type="date" formControlName="orderDate" />
+
+    @if (form.get('orderDate')?.touched && form.get('orderDate')?.invalid) {
+      <div>
+        <small>Required field</small>
+      </div>
+    }
+  </div>
+
+  <div>
+    <label>Status</label>
+    <select formControlName="status">
+      <option value="PENDING">Pending</option>
+      <option value="APPROVED">Approved</option>
+      <option value="REJECTED">Rejected</option>
+    </select>
+  </div>
+
+  <div formArrayName="items" style="margin-top: 20px">
+    <h3>Items</h3>
+
+    @if (items.length === 0) {
+      <div>
+        <p>No items added</p>
+      </div>
+    }
+
+    @for (item of items.controls; track $index; let i = $index) {
+      <div [formGroupName]="i" style="margin-bottom: 12px; border: 1px solid #ddd; padding: 12px">
+        <div>
+          <label>Product</label>
+          <input type="text" formControlName="productName" />
+
+          @if (item.get('productName')?.touched && item.get('productName')?.invalid) {
+            <div>
+              <small>Required</small>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label>Quantity</label>
+          <input type="number" formControlName="quantity" />
+
+          @if (item.get('quantity')?.touched && item.get('quantity')?.invalid) {
+            <div>
+              <small>Must be at least 1</small>
+            </div>
+          }
+        </div>
+
+        <div>
+          <label>Unit Price</label>
+          <input type="number" step="0.01" formControlName="unitPrice" />
+
+          @if (item.get('unitPrice')?.touched && item.get('unitPrice')?.invalid) {
+            <div>
+              <small>Must be 0 or greater</small>
+            </div>
+          }
+        </div>
+
+        <button type="button" (click)="removeItem(i)">Remove item</button>
+      </div>
+    }
+  </div>
+
+  <button type="button" (click)="addItem()">Add item</button>
+
+  <div style="margin-top: 16px">
+    <label>Total Amount</label>
+    <input type="number" formControlName="totalAmount" readonly />
+    <small>Auto-calculated</small>
+  </div>
+
+  <div style="margin-top: 16px">
+    <button type="submit" [disabled]="saving || loading || form.invalid">
+      {{ saving ? 'Saving...' : 'Save order' }}
+    </button>
+  </div>
+</form>
