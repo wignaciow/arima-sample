@@ -1,0 +1,48 @@
+<div>
+  <h2>Procurement Orders</h2>
+
+  <div style="margin-bottom: 16px">
+    <button type="button" [routerLink]="['/procurement/new']">New Order</button>
+  </div>
+
+  @if (loading) {
+    <p>Loading orders...</p>
+  }
+
+  @if (!loading && orders.length === 0) {
+    <p>No orders found</p>
+  }
+
+  @if (!loading && orders.length > 0) {
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Request Number</th>
+          <th>Supplier</th>
+          <th>Order Date</th>
+          <th>Status</th>
+          <th>Total Amount</th>
+          <th>Items</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (order of orders; track order.id) {
+          <tr>
+            <td>{{ order.requestNumber }}</td>
+            <td>{{ order.supplierName }}</td>
+            <td>{{ order.orderDate }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.totalAmount }}</td>
+            <td>{{ order.items.length }}</td>
+          </tr>
+          <td>
+            <button type="button">Edit</button>
+            <button type="button" (click)="deleteOrder(order.id)">Delete</button>
+          </td>
+        }
+      </tbody>
+    </table>
+  }
+</div>
