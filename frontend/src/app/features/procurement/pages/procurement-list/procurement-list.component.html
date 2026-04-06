@@ -38,8 +38,8 @@
             <td>{{ order.items.length }}</td>
           </tr>
           <td>
-            <button type="button">Edit</button>
-            <button type="button" (click)="deleteOrder(order.id)">Delete</button>
+            <a [routerLink]="['/procurement', order.id, 'edit']">Edit</a>
+            <button (click)="deleteOrder(order.id)">Delete</button>
           </td>
         }
       </tbody>

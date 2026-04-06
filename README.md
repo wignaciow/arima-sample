@@ -1,13 +1,15 @@
-# ARIMA – Field Management Platform (Sample)
+# PROYECT – Field Management Platform (Sample)
 
 Full-stack application designed for agricultural and carbon footprint management.
 
 ## Tech Stack
+
 - Angular
 - Spring Boot
 - PostgreSQL
 
 ## Key Features
+
 - Carbon footprint calculation based on IPCC guidelines
 - Procurement management (orders, products, suppliers)
 - Staff and equipment management
@@ -15,15 +17,18 @@ Full-stack application designed for agricultural and carbon footprint management
 - Reporting and dashboards (BIRT)
 
 ## My Role
+
 - Designed and developed backend APIs (Spring Boot)
 - Modeled relational database structures (PostgreSQL)
 - Implemented frontend features (Angular)
 - Translated IPCC-based carbon models into backend logic and data structures
 
 ## Repository Structure
+
 /backend → Spring Boot API (controllers, services, entities)
 /frontend → Angular components and services (simplified)
 /docs → architecture notes
 
 ## Notes
-This repository contains a simplified version of selected components from a real production system (ARIMA).
+
+This repository contains a simplified version of selected components from a real production system.
