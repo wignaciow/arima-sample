@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProcurementOrder } from '../../models/procurement-order.model';
 import { ProcurementService } from '../../services/procurement.service';
@@ -11,10 +11,10 @@ import { ProcurementService } from '../../services/procurement.service';
   templateUrl: './procurement-list.component.html',
 })
 export class ProcurementListComponent implements OnInit {
+  private readonly procurementService = inject(ProcurementService);
+
   orders: ProcurementOrder[] = [];
   loading = false;
-
-  constructor(private procurementService: ProcurementService) {}
 
   ngOnInit(): void {
     this.loadOrders();

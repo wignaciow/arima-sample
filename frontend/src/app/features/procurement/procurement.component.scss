@@ -1,0 +1,56 @@
+.procurement-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+}
+
+.procurement-page__topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-lg);
+  min-height: 56px;
+  padding: 0 var(--app-space-sm);
+}
+
+.procurement-page__separator {
+  color: var(--app-border-color);
+  font-weight: 500;
+}
+
+.procurement-page__tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+}
+
+.procurement-page__tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--app-space-md);
+  border-radius: var(--app-radius-md);
+  color: var(--app-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.procurement-page__tab:hover {
+  background: var(--app-surface-muted);
+}
+
+.procurement-page__tab.is-active {
+  color: var(--app-primary-dark);
+  background: var(--app-primary-light);
+}
+
+.procurement-page__tab.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.procurement-page__content {
+  width: 100%;
+  margin-top: var(--app-space-xl);
+}

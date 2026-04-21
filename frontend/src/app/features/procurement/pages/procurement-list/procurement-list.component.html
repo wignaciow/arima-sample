@@ -1,48 +1,73 @@
-<div>
-  <h2>Procurement Orders</h2>
-
-  <div style="margin-bottom: 16px">
-    <button type="button" [routerLink]="['/procurement/new']">New Order</button>
+<section class="rounded-xl border border-[var(--app-border)] bg-[var(--app-surface)] p-5 shadow-sm">
+  <div class="mb-4 grid gap-3 md:grid-cols-[1fr_1fr]">
+    <h2 class="m-0 text-base font-semibold text-[var(--app-text)]">Listado de solicitudes</h2>
+    <div class="rounded-lg border border-[var(--app-border)] p-3 text-sm text-[var(--app-text-muted)]">
+      Búsqueda
+    </div>
   </div>
 
-  @if (loading) {
-    <p>Loading orders...</p>
-  }
-
-  @if (!loading && orders.length === 0) {
-    <p>No orders found</p>
-  }
-
-  @if (!loading && orders.length > 0) {
-    <table border="1" cellpadding="8" cellspacing="0">
-      <thead>
+  <div class="overflow-x-auto rounded-lg border border-[var(--app-border)]">
+    <table class="min-w-full border-collapse text-sm">
+      <thead class="bg-[var(--app-surface-muted)] text-left text-[var(--app-text-muted)]">
         <tr>
-          <th>Request Number</th>
-          <th>Supplier</th>
-          <th>Order Date</th>
-          <th>Status</th>
-          <th>Total Amount</th>
-          <th>Items</th>
-          <th>Actions</th>
+            <th class="px-3 py-2 font-medium">Nº de solicitud</th>
+            <th class="px-3 py-2 font-medium">Proveedor</th>
+            <th class="px-3 py-2 font-medium">Fecha de pedido</th>
+            <th class="px-3 py-2 font-medium">Estado</th>
+            <th class="px-3 py-2 font-medium">Coste estimado</th>
+            <th class="px-3 py-2 font-medium">Items</th>
+            <th class="px-3 py-2 font-medium">Acciones</th>
         </tr>
       </thead>
 
-      <tbody>
-        @for (order of orders; track order.id) {
+      <tbody class="text-[var(--app-text)]">
+        @if (loading) {
           <tr>
-            <td>{{ order.requestNumber }}</td>
-            <td>{{ order.supplierName }}</td>
-            <td>{{ order.orderDate }}</td>
-            <td>{{ order.status }}</td>
-            <td>{{ order.totalAmount }}</td>
-            <td>{{ order.items.length }}</td>
+            <td colspan="7" class="px-3 py-4 text-[var(--app-text-muted)]">Cargando solicitudes...</td>
           </tr>
-          <td>
-            <a [routerLink]="['/procurement', order.id, 'edit']">Edit</a>
-            <button (click)="deleteOrder(order.id)">Delete</button>
-          </td>
+        } @else if (orders.length === 0) {
+          <tr>
+            <td colspan="7" class="px-3 py-4 text-[var(--app-text-muted)]">Lista sin datos</td>
+          </tr>
+        } @else {
+          @for (order of orders; track order.id) {
+            <tr class="border-t border-[var(--app-border)]">
+              <td class="px-3 py-2">{{ order.requestNumber }}</td>
+              <td class="px-3 py-2">{{ order.supplierName }}</td>
+              <td class="px-3 py-2">{{ order.orderDate }}</td>
+              <td class="px-3 py-2">{{ order.status }}</td>
+              <td class="px-3 py-2">{{ order.totalAmount }}</td>
+              <td class="px-3 py-2">{{ order.items.length }}</td>
+              <td class="px-3 py-2">
+                <a
+                  [routerLink]="['/app/procurement', order.id, 'edit']"
+                  class="mr-3 text-[var(--app-primary-dark)] no-underline"
+                >
+                  Editar
+                </a>
+                <button type="button" (click)="deleteOrder(order.id)" class="text-[#c93232]">Eliminar</button>
+              </td>
+            </tr>
+          }
         }
       </tbody>
     </table>
-  }
-</div>
+  </div>
+
+  <div class="mt-4 flex items-center justify-between">
+    <button
+      type="button"
+      class="rounded-md border border-[var(--app-border)] bg-[var(--app-surface-muted)] px-4 py-2 text-sm text-[var(--app-text-muted)]"
+      disabled
+    >
+      Eliminar
+    </button>
+    <button
+      type="button"
+      [routerLink]="['/app/procurement/new']"
+      class="rounded-md bg-[var(--app-primary)] px-4 py-2 text-sm font-semibold text-white"
+    >
+      Nueva solicitud
+    </button>
+  </div>
+</section>

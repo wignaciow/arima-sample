@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProcurementService } from '../../services/procurement.service';
@@ -17,17 +17,15 @@ import {
   templateUrl: './procurement-form.component.html',
 })
 export class ProcurementFormComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly procurementService = inject(ProcurementService);
+
   form!: FormGroup;
   orderId?: number;
   loading = false;
   saving = false;
-
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private procurementService: ProcurementService,
-  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -155,7 +153,7 @@ export class ProcurementFormComponent implements OnInit {
           : await this.procurementService.create(this.buildCreatePayload());
 
       console.log('Order saved:', result);
-      this.router.navigate(['/procurement']);
+      this.router.navigate(['/app/procurement']);
     } catch (error) {
       console.error('Error saving order', error);
     } finally {

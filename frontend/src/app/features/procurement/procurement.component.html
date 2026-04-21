@@ -1,0 +1,24 @@
+<section class="procurement-page">
+  <header class="procurement-page__topbar">
+    @if (!isEditorRoute()) {
+      <app-context-selector></app-context-selector>
+      <div class="procurement-page__separator" aria-hidden="true">|</div>
+    }
+
+    <nav class="procurement-page__tabs" aria-label="Secciones de procurement">
+      <a
+        routerLink="/app/procurement"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="procurement-page__tab"
+      >
+        Solicitudes
+      </a>
+      <span class="procurement-page__tab is-disabled" aria-disabled="true">Albaranes</span>
+    </nav>
+  </header>
+
+  <div class="procurement-page__content">
+    <router-outlet></router-outlet>
+  </div>
+</section>

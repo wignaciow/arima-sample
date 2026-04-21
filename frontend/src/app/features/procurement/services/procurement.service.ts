@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   ProcurementOrder,
   ProcurementOrderCreate,
   ProcurementOrderUpdate,
 } from '../models/procurement-order.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProcurementService {
+  private readonly http = inject(HttpClient);
+  
   private readonly baseUrl = '/api/procurement-orders';
 
   async findAll(): Promise<ProcurementOrder[]> {
