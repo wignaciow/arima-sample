@@ -1,0 +1,32 @@
+<div class="flex items-center gap-2 cursor-pointer">
+  <button
+    #companyBtnRef
+    mat-mini-fab
+    color="basic"
+    [matMenuTriggerFor]="companyMenuRef"
+    [disabled]="disabled()"
+    [disableRipple]="disableRipple()"
+  >
+    <mat-icon color="primary">travel_explore</mat-icon>
+  </button>
+  <span>{{ context.selectedCompany()?.label ?? 'Sin empresa' }}</span>
+</div>
+
+<mat-menu #companyMenuRef="matMenu">
+  <app-search-box
+    [searchLabel]="'generic.action.companySelect'"
+    [searchCtrl]="companySearchCtrl"
+    (searchChange)="onSearchChange($event)"
+    (click)="$event.preventDefault(); $event.stopPropagation();"
+  />
+
+  <div class="max-h-80 overflow-auto">
+    @for (entry of visibleCompanies(); track entry.id) {
+      <button
+        mat-menu-item
+        (click)="activateCompany(entry)"
+      >{{ entry.label }}
+      </button>
+    }
+  </div>
+</mat-menu>

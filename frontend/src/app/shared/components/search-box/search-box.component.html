@@ -1,0 +1,30 @@
+<mat-form-field
+  class="w-full"
+  subscriptSizing="dynamic"
+>
+  <mat-label>{{ searchLabel() | translate }}</mat-label>
+
+  <input
+    matInput
+    [formControl]="searchCtrl()"
+    type="text"
+  />
+
+  <ng-content select="mat-hint"></ng-content>
+  <ng-content select="mat-error"></ng-content>
+
+  @if (showSearchIcon()) {
+    <mat-icon matPrefix>search</mat-icon>
+  }
+
+  @if (searchCtrl().value) {
+    <button
+      matSuffix
+      mat-icon-button
+      (click)="searchCtrl().reset('')"
+      type="button"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field>
