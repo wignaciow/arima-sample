@@ -1,0 +1,23 @@
+{
+  "generic": {
+    "action": {
+       "companySelect": "Seleccionar una compañía"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Inicio"
+    },
+    "procurement": {
+      "title": "Aprovisionamiento"
+    },
+    "reports": {
+      "title": "Informes"
+    }
+  },
+  "common": {
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "Inglés"
+  }
+}

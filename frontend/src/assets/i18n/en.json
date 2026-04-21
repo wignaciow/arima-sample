@@ -1,0 +1,23 @@
+{
+  "generic": {
+    "action": {
+       "companySelect": "Select an estate"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "procurement": {
+      "title": "Procurement"
+    },
+    "reports": {
+      "title": "Reports"
+    }
+  },
+  "common": {
+    "language": "Language",
+    "spanish": "Spanish",
+    "english": "English"
+  }
+}

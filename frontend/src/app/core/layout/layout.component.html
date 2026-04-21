@@ -1,11 +1,65 @@
-<header>
-  <h1>Project Sample</h1>
-</header>
+<div class="min-h-screen grid grid-cols-[280px_1fr] bg-app-bg">
+  <aside class="app-sidebar">
+    <div class="app-sidebar__brand">
+      <img
+        [ngSrc]="company.logo"
+        width="44"
+        height="44"
+        [attr.alt]="company.altText"
+        priority
+        class="app-sidebar__logo"
+      />
 
-<nav>
-  <!-- links -->
-</nav>
+      <div>
+        <h2 class="app-sidebar__title">Project Sample</h2>
+        <p class="app-sidebar__subtitle">Portfolio app</p>
+      </div>
+    </div>
 
-<main>
-  <router-outlet />
-</main>
+    <nav class="app-sidebar__nav">
+      <a
+        routerLink="/app/dashboard"
+        routerLinkActive="active"
+        class="app-sidebar__link"
+      >
+        Dashboard
+      </a>
+
+      <a
+        routerLink="/app/procurement"
+        routerLinkActive="active"
+        class="app-sidebar__link"
+      >
+        Procurement
+      </a>
+
+      <a
+        routerLink="/app/reports"
+        routerLinkActive="active"
+        class="app-sidebar__link"
+      >
+        Reports
+      </a>
+    </nav>
+
+    @if (authService.user(); as user) {
+      <div class="app-sidebar__user">
+        <p class="app-sidebar__user-name">
+          {{ user.fullName || user.username }}
+        </p>
+
+        <p class="app-sidebar__user-email">
+          {{ user.email }}
+        </p>
+
+        <button type="button" (click)="logout()" class="app-btn app-btn--secondary">
+          Cerrar sesión
+        </button>
+      </div>
+    }
+  </aside>
+
+  <main class="p-8 bg-app-bg">
+    <router-outlet />
+  </main>
+</div>

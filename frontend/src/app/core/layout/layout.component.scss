@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+a.active {
+  background: var(--app-primary-light);
+  color: var(--app-primary-dark);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--app-primary) 22%, white);
+}
