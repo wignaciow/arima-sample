@@ -1,0 +1,48 @@
+@use './tokens' as t;
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --app-primary: #{t.$color-primary};
+  --app-primary-dark: #{t.$color-primary-dark};
+  --app-primary-light: #{t.$color-primary-light};
+
+  --app-accent: #{t.$color-accent};
+  --app-accent-light: #{t.$color-accent-light};
+
+  --app-warn: #{t.$color-warn};
+  --app-warn-light: #{t.$color-warn-light};
+
+  /* Surfaces */
+  --app-bg: #{t.$color-bg};
+  --app-surface: #{t.$color-surface};
+  --app-surface-muted: #{t.$color-surface-muted};
+
+  /* Text */
+  --app-text: #{t.$color-text};
+  --app-text-muted: #{t.$color-text-muted};
+  --app-text-soft: #{t.$color-text-soft};
+
+  /* Borders */
+  --app-border: #{t.$color-border};
+  --app-border-strong: #{t.$color-border-strong};
+
+  /* Radius */
+  --app-radius-sm: #{t.$radius-sm};
+  --app-radius-md: #{t.$radius-md};
+  --app-radius-lg: #{t.$radius-lg};
+  --app-radius-xl: #{t.$radius-xl};
+
+  /* Shadows */
+  --app-shadow-sm: #{t.$shadow-sm};
+  --app-shadow-md: #{t.$shadow-md};
+
+  /* Spacing */
+  --app-space-xs: #{t.$space-xs};
+  --app-space-sm: #{t.$space-sm};
+  --app-space-md: #{t.$space-md};
+  --app-space-lg: #{t.$space-lg};
+  --app-space-xl: #{t.$space-xl};
+  --app-space-2xl: #{t.$space-2xl};
+}
