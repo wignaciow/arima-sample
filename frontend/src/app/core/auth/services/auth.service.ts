@@ -1,18 +1,14 @@
 import { Injectable, signal, computed } from '@angular/core';
 import Keycloak, { KeycloakProfile } from 'keycloak-js';
 import { keycloakConfig } from '../keycloak/keycloak.config';
-import { AuthUser } from '../auth.model';
+import { AuthUser, ParsedToken } from '../auth.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly keycloak = new Keycloak({
-    url: keycloakConfig.url,
-    realm: keycloakConfig.realm,
-    clientId: keycloakConfig.clientId,
-  });
-
+  private readonly keycloak = new Keycloak(keycloakConfig);
+  
   private readonly _initialized = signal(false);
   private readonly _authenticated = signal(false);
   private readonly _user = signal<AuthUser | null>(null);
@@ -35,30 +31,22 @@ export class AuthService {
       if (authenticated) {
         await this.loadUserData();
       } else {
-        this._user.set(null);
+        this.clearSession();
       }
 
       this._initialized.set(true);
     } catch (error) {
       console.error('Error initializing Keycloak', error);
-      this._authenticated.set(false);
-      this._user.set(null);
+      this.clearSession();
       this._initialized.set(true);
     }
   }
 
-  async login(): Promise<void> {
-    await this.keycloak.login({
-      redirectUri: `${window.location.origin}/app/dashboard`,
-    });
-  }
-
   async logout(): Promise<void> {
-    this._authenticated.set(false);
-    this._user.set(null);
+    this.clearSession();
 
     await this.keycloak.logout({
-      redirectUri: `${window.location.origin}/auth/login`,
+      redirectUri: `${window.location.origin}`,
     });
   }
 
@@ -82,6 +70,10 @@ export class AuthService {
     return this.getUserRoles().includes(role);
   }
 
+  getUserCode(): string | undefined {
+    return this._user()?.userCode;
+  }
+
   async refreshToken(minValidity = 30): Promise<boolean> {
     try {
       if (!this._authenticated()) {
@@ -92,15 +84,18 @@ export class AuthService {
       return refreshed;
     } catch (error) {
       console.error('Error refreshing token', error);
-      this._authenticated.set(false);
-      this._user.set(null);
+     this.clearSession();
       return false;
     }
   }
 
   private async loadUserData(): Promise<void> {
     const profile: KeycloakProfile = await this.keycloak.loadUserProfile();
-    const parsedToken = this.keycloak.tokenParsed as any;
+    const parsedToken  = (this.keycloak.tokenParsed ?? {}) as ParsedToken;
+    const userCode =
+      parsedToken.user_code ??
+      parsedToken.userCode ??
+      undefined;
 
     const roles: string[] = parsedToken?.realm_access?.roles ?? [];
 
@@ -115,9 +110,15 @@ export class AuthService {
         profile.username ||
         parsedToken?.preferred_username ||
         '',
+      userCode,
       roles,
     };
 
     this._user.set(user);
+  }
+
+  private clearSession(): void {
+    this._authenticated.set(false);
+    this._user.set(null);
   }
 }

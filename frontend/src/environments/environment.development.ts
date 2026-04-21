@@ -13,4 +13,3 @@ export const environment: AppEnvironment = {
     clientId: 'proyect-sample-web',
   },
 };
-

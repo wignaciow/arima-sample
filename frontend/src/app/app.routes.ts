@@ -19,16 +19,19 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
+        data: { title: 'pages.dashboard.title' },
         loadComponent: () =>
           import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
       {
         path: 'procurement',
+        data: { title: 'pages.procurement.title' },
         loadChildren: () =>
           import('./features/procurement/procurement.routes').then((m) => m.PROCUREMENT_ROUTES),
       },
       {
         path: 'reports',
+        data: { title: 'pages.reports.title' },
         loadComponent: () =>
           import('./features/reports/reports.component').then((m) => m.ReportsComponent),
       },
