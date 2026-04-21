@@ -32,3 +32,4 @@ Full-stack application designed for agricultural and carbon footprint management
 ## Notes
 
 This repository contains a simplified version of selected components from a real production system.
+Environment variables and Keycloak configuration are not included for security reasons
