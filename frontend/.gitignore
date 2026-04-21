@@ -5,11 +5,22 @@
 /tmp
 /out-tsc
 /bazel-out
+/build
+/.cache
 
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
+*.log
+
+# Angular
+/.angular/cache
+
+# Environment
+/src/environments/*.local.ts
+src/environments/environment.local.ts
+src/environments/environment.production.ts
 
 # IDEs and editors
 .idea/
@@ -19,8 +30,10 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.swp
+*.swo
 
-# Visual Studio Code
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -28,9 +41,9 @@ yarn-error.log
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
+.vscode/settings.json
 
-# Miscellaneous
-/.angular/cache
+# Misc
 .sass-cache/
 /connect.lock
 /coverage
@@ -39,6 +52,9 @@ testem.log
 /typings
 __screenshots__/
 
-# System files
+# Docker
+docker-data/
+
+# System
 .DS_Store
 Thumbs.db
